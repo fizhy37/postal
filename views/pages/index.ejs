@@ -11,9 +11,8 @@
       //do an ajax
         $.get('/math_service', 
           {
-            'number1': $('input[name=number1]').val(),
-            'number2': $('input[name=number2]').val(),
-            'operation': $('input[name=operation]:checked').val()
+            'weight': $('input[name=weight]').val(),
+            'package': $('input[name=package]:checked').val()
           },
           function callback(data, status) {
           //when the thing comes back, update the DOM. 
@@ -34,19 +33,18 @@
   <div class="container">
     <h1>This is a test</h1>
     <form action="/math" method="GET">
-      <label for="number1">First Number</label>
-      <input type="text" name="number1" value="1"><br/>
-      <label for="number2">Second Number</label>
-      <input type="text" name="number2" value="4"><br/>
-      <label for="operation">Select Operation</label><br/>
-      <input type="radio" name="operation" value="add" checked>
-        <label for="operation">Add</label><br/>
-      <input type="radio" name="operation" value="subtract">
-        <label for="operation">Subtract</label><br/>
-      <input type="radio" name="operation" value="multiply">
-        <label for="operation">Multiply</label><br/>
-      <input type="radio" name="operation" value="divide">
-        <label for="operation">Divide</label><br/>
+      <label for="weight">Ounces</label>
+      <input type="text" name="weight" value="2"><br/>
+
+      <label for="package">Select Packaging</label><br/>
+      <input type="radio" name="package" value="stamped" checked>
+        <label for="package">Stamped Letter</label><br/>
+      <input type="radio" name="package" value="metered">
+        <label for="package">Metered Letter</label><br/>
+        <input type="radio" name="package" value="flats">
+        <label for="package">Large Flat Envelope</label><br/>
+      <input type="radio" name="package" value="parcels">
+        <label for="package">Parcel</label><br/>
       <input type="submit" name="submit">
     </form>
     <button onclick="dothejax()">AJAX Version </button>

@@ -10,29 +10,38 @@ app.get('/', function(request, response) {
 });
 app.get('/math', function(request, response) {
   var result = 0;
+  var base = 0;
   //get the operation....
-  var operation = request.param('operation');
+  var package = request.query.package;
   //get the numbers..
   // var numTEST = request.query.number1; //this one is said to be preferred. 
-  var num1 = request.param('number1'); //said to be deprecated?
-  var num1 = parseInt(num1);
-  var num2 = request.param('number2');
-  var num2 = parseInt(num2);
+  var weight = request.query.weight;
+  var weight = parseInt(weight);
+  var rounded = Math.ceil(weight);
   // console.log(num1);
   // console.log(num2);
   // console.log(operation);
   // console.log(numTEST);
   //perform the operation  
-  if (operation == 'add') {
-    result = num1 + num2;
-  } else if (operation == 'subtract') {
-    result = num1 - num2;
-  } else if (operation == 'multiply') {
-    result = num1 * num2;
-  } else if (operation == 'divide') {
-    result = num1 / num2;
+  if (package == 'stamped') {
+    base = .28;
+    result = base + rounded * .21;
+  } else if (package == 'metered') {
+    base = .25;
+    result = base + rounded * .21;
+  } else if (package == 'flat') {
+    base = .77;
+    result = base + rounded * .21;
+  } else if (package == 'parcel') {
+    if (rounded < 5) {
+      result = 3.00;
+    } else {
+      base = 3.00;
+      rounded = rounded - 4;
+      result = base + rounded * .16;
+    }
   } else {
-    result = 40;
+    result = 40000;
   }
   //console the output
   console.log(result);
@@ -41,35 +50,45 @@ app.get('/math', function(request, response) {
 app.get('/math_service', function(request, response) {
   console.dir('test');
   var result = 0;
+  var base = 0;
   //get the operation....
-  var operation = request.param('operation');
+  var package = request.query.package;
   //get the numbers..
   // var numTEST = request.query.number1; //this one is said to be preferred. 
-  var num1 = request.param('number1'); //said to be deprecated?
-  console.dir(num1);
-  var num1 = parseInt(num1);
-  console.dir(num1);
-  var num2 = request.param('number2');
-  console.dir(num2);
-  var num2 = parseInt(num2);
-  console.dir(num2);
+  var weight = request.query.weight;
+  var weight = parseInt(weight);
+  var rounded = Math.ceil(weight);
+  // console.log(num1);
+  // console.log(num2);
+  // console.log(operation);
+  // console.log(numTEST);
   //perform the operation  
-  if (operation == 'add') {
-    result = num1 + num2;
-  } else if (operation == 'subtract') {
-    result = num1 - num2;
-  } else if (operation == 'multiply') {
-    result = num1 * num2;
-  } else if (operation == 'divide') {
-    result = num1 / num2;
+  if (package == 'stamped') {
+    base = .28;
+    result = base + rounded * .21;
+  } else if (package == 'metered') {
+    base = .25;
+    result = base + rounded * .21;
+  } else if (package == 'flat') {
+    base = .77;
+    result = base + rounded * .21;
+  } else if (package == 'parcel') {
+    if (rounded < 5) {
+      result = 3.00;
+    } else {
+      base = 3.00;
+      rounded = rounded - 4;
+      result = base + rounded * .16;
+    }
   } else {
-    result = 40;
+    result = 40000;
   }
   //console the output
   console.log(result);
   response.setHeader('Content-Type', 'application/json');
   response.send(JSON.stringify({ result: result }));
 });
+
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

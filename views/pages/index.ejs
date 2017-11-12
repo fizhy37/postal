@@ -23,7 +23,8 @@
             var result = data.result;
             //update DOM.
             $('#result').html(result);
-              
+            $('#package').html(input[name=package]);
+            $('#weight').html(input[name=weight]);
           }
         });
     }
@@ -50,7 +51,8 @@
     </form>
     <button onclick="dothejax()">AJAX Version </button>
     <h2 id="result"></h2>
-    <p id="details"></p>
+    <p id="package"></p>
+    <p id="weight"></p>
   </div>
 </body>
 </html>

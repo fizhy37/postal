@@ -22,20 +22,20 @@ app.get('/getRate', function(request, response) {
   //perform the calculation  
   if (package == 'stamped') {
     base = .28;
-    result = Math.round10(base + rounded * .21, 2);
+    result = base + rounded * .21;
   } else if (package == 'metered') {
     base = .25;
-    result = Math.round10(base + rounded * .21, 2);
+    result = base + rounded * .21;
   } else if (package == 'flat') {
     base = .77;
-    result = Math.round10(base + rounded * .21, 2);
+    result = base + rounded * .21;
   } else if (package == 'parcel') {
     if (rounded < 5) {
       result = 3.00;
     } else {
       base = 3.00;
       rounded = rounded - 4;
-      result = Math.round10(base + rounded * .16, 2);
+      result = base + rounded * .16;
     }
   } else {
     result = 0;
@@ -55,23 +55,23 @@ app.get('/calculateRate', function(request, response) {
   var weight = parseInt(weight);
   var rounded = Math.ceil(weight);
 
-  //perform the calculation  
+  //perform the calculation
   if (package == 'stamped') {
     base = .28;
-    result = Math.round10(base + rounded * .21, 2);
+    result = base + rounded * .21;
   } else if (package == 'metered') {
     base = .25;
-    result = Math.round10(base + rounded * .21, 2);
+    result = base + rounded * .21;
   } else if (package == 'flat') {
     base = .77;
-    result = Math.round10(base + rounded * .21, 2);
+    result = base + rounded * .21;
   } else if (package == 'parcel') {
     if (rounded < 5) {
       result = 3.00;
     } else {
       base = 3.00;
       rounded = rounded - 4;
-      result = Math.round10(base + rounded * .16, 2);
+      result = base + rounded * .16;
     }
   } else {
     result = 0;

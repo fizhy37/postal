@@ -54,27 +54,30 @@ app.get('/calculateRate', function(request, response) {
   var weight = request.query.weight;
   var weight = parseInt(weight);
   var rounded = Math.ceil(weight);
+  var pounds = Math.ceil(weight / 16);
 
   //perform the calculation
-  if (package == 'stamped') {
-    base = .28;
-    result = base + rounded * .21;
-  } else if (package == 'metered') {
-    base = .25;
-    result = base + rounded * .21;
-  } else if (package == 'flat') {
-    base = .77;
-    result = base + rounded * .21;
-  } else if (package == 'parcel') {
-    if (rounded < 5) {
+  if (weight < 3.5 && package != 'flat') {
+    if (package == 'stamped') {
+      base = .28;
+      result = base + rounded * .21;
+    } else if (package == 'metered') {
+      base = .25;
+      result = base + rounded * .21;
+    } else {
+      result = 0;
+    } 
+  } else if (package != 'parcel') {
+      base = .77;
+      result = base + rounded * .21;
+  } else {
+    if (pounds < 5) {
       result = 3.00;
     } else {
       base = 3.00;
       rounded = rounded - 4;
       result = base + rounded * .16;
     }
-  } else {
-    result = 0;
   }
   //console the output
   console.log(result);
